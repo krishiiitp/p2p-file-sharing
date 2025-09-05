@@ -1,5 +1,8 @@
 package p2p;
 
+import p2p.controller.FileController;
+import java.io.IOException;
+
 public class App {
     public static void main(String[] args) {
         try {
@@ -17,7 +20,7 @@ public class App {
             );
             System.out.println("press enter to stop the server");
             // TODO: implement stopping of server when enter is pressed
-        } catch (Exception exception) {
+        } catch (IOException exception) {
             System.err.println("failed to start the server at port 8080");
             exception.printStackTrace();
         }

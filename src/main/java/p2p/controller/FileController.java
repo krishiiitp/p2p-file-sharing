@@ -1,7 +1,7 @@
 package p2p.controller;
 
 import com.sun.net.httpserver.*;
-import jdk.jpackage.internal.IOUtils;
+import org.apache.commons.io.IOUtils;
 import p2p.service.FileSharer;
 
 import java.io.*;
@@ -9,6 +9,7 @@ import java.net.InetSocketAddress;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.net.Socket;
 
 public class FileController {
     private final FileSharer fileSharer;
@@ -205,13 +206,13 @@ public class FileController {
 
             public ParseResult(String fileName, byte[] fileContent, String contentType) {
                 this.fileName = fileName;
-                this.fileContent = this.fileContent;
+                this.fileContent = fileContent;
                 this.contentType = contentType;
             }
         }
     }
 
-    private int findSequence(byte[] data, byte[] sequence, int startPos) {
+    private static int findSequence(byte[] data, byte[] sequence, int startPos) {
         outer:
             for (int i = startPos; i <= (data.length - sequence.length); i ++) {
                 for (int j = 0; j < sequence.length; j ++) {
